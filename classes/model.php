@@ -1651,6 +1651,17 @@ class Model implements \ArrayAccess, \Iterator, \Sanitization
 			}
 		}
 	}
+	
+	/**
+	 * Disacard changes
+	 *
+	 * @return  void
+	 */
+	public function discard_changes()
+	{
+		$this->_data = $this->_original;
+		$this->_data_relations = $this->_original_relations;
+	}
 
 	/**
 	 * Compare current state with the retrieved state
