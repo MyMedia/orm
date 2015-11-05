@@ -1543,6 +1543,10 @@ class Query
 		$tmp_relations   = $this->relations;
 		$this->relations = array();
 
+		// remove limit and offset
+		$this->limit = null;
+		$this->offset = null;
+
 		// Build query and execute update
 		$query = \DB::delete(call_user_func($this->model.'::table'));
 		$tmp   = $this->build_query($query, array(), 'delete');
