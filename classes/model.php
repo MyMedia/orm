@@ -24,7 +24,7 @@ class RecordNotFound extends \OutOfBoundsException {}
  */
 class FrozenObject extends \RuntimeException {}
 
-class Model implements \ArrayAccess, \Iterator, \Sanitization
+class Model implements \ArrayAccess, \Iterator, \Sanitization, \JsonSerializable
 {
 	/* ---------------------------------------------------------------------------
 	 * Static usage
@@ -2347,6 +2347,11 @@ class Model implements \ArrayAccess, \Iterator, \Sanitization
 	public function valid()
 	{
 		return key($this->_iterable) !== null;
+	}
+
+	public function jsonSerialize()
+	{
+		return $this->to_array(true, true, true);
 	}
 
 }
