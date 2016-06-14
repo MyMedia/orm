@@ -163,4 +163,14 @@ abstract class Relation
 	{
 		return $this->singular;
 	}
+
+	public function get_key($type)
+	{
+		return $this->{'key_' . $type};
+	}	
+
+	public function get_table($type)
+	{
+		return $this->{'table_' . $type};
+	}	
 }
