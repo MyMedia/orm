@@ -1811,6 +1811,27 @@ class Model implements \ArrayAccess, \Iterator, \Sanitization, \JsonSerializable
 
 		return $diff;
 	}
+	
+	/**
+	 * Is property changed on the current unsaved model.
+	 *
+	 * @param   string $property
+	 *
+	 * @throws \OutOfBoundsException
+	 *
+	 * @return  bool
+	 */
+	public function is_property_changed($property)
+	{
+		$properties = static::properties();
+		
+		if( ! isset($properties[$property]))
+		{
+			throw new \OutOfBoundsException('Unknown property or relation: '.$property);
+		}
+		
+		return ($this->_data[$property] != $this->_original[$property]);
+	}
 
 	/***
 	 * Returns whether the given relation is fetched. If no relation is
