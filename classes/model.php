@@ -2018,17 +2018,14 @@ class Model implements \ArrayAccess, \Iterator, \Sanitization, \JsonSerializable
 			}
 			else
 			{
-				if ( ! in_array(get_class($rel), static::$to_array_references))
+				if (is_null($rel))
 				{
-					if (is_null($rel))
-					{
-						$array[$name] = null;
-					}
-					else
-					{
-						static::$to_array_references[] = get_class($rel);
-						$array[$name] = $rel->to_array($custom, true);
-					}
+					$array[$name] = null;
+				}
+				elseif ( ! in_array(get_class($rel), static::$to_array_references))
+				{
+					static::$to_array_references[] = get_class($rel);
+					$array[$name] = $rel->to_array($custom, true);
 				}
 			}
 		}
